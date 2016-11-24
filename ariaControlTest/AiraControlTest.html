@@ -1,0 +1,325 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>QUnit Tests for ARIA Control Library</title>
+
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+  <script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+  <link rel="stylesheet" href="ariaControl.css">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="../ariaConnect.js"></script>
+  <script src="../ariaControlQUnits.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      const acCtrl = new ariaConnect();
+
+       window.showTooltip = () => {
+        $('.pageTooltip').css('display', 'inline-block');
+        acCtrl.showPopup($('.acTooltip'));
+      }
+      window.hideTooltip = () => {
+        $('.pageTooltip').css('display', 'none');
+        acCtrl.hidePopup($('.acTooltip'));
+      }
+
+      $('.pageInput.acTooltipCtrl').focusin(showTooltip);
+
+      $('.pageInput.acTooltipCtrl').focusout(hideTooltip);
+
+    });
+  </script>
+</head>
+
+<body>
+
+  <div id="qunit"></div>
+
+  <div class="pageCont">
+    <h1>Aria Control Library</h1>
+    <div class="modCont">
+      <h2 class="modTitle">Alert</h2>
+      <div class="acAlert pageAlert">
+        <h2>Error</h2>
+        <p>There has been an error on your page</p>
+        <ul>
+          <li>Problem 1</li>
+          <li>Problem 2</li>
+          <li>Problem 3</li>
+          <li>Problem 4</li>
+        </ul>
+      </div>
+      <hr/>
+    </div>
+    <div class="modCont">
+      <h2 class="modTitle">Warning</h2>
+      <div class="acWarning pageAlert">
+        <h2>Warning</h2>
+        <p>Check this out</p>
+        <ul>
+          <li>Problem 1</li>
+          <li>Problem 2</li>
+          <li>Problem 3</li>
+          <li>Problem 4</li>
+        </ul>
+      </div>
+      <hr/>
+    </div>
+    <div class="modCont">
+      <h2 class="modTitle">Warning</h2>
+      <div class="acMsg pageAlert">
+        <h2>Message</h2>
+        <p>Nothing much to see here, keep going</p>
+      </div>
+      <hr/>
+    </div>
+    <div class="modCont">
+      <h2 class="modTitle">Tooltip</h2>
+      <input type="text" class="pageInput acTooltipCtrl" placeholder="Enter Me" />
+      <div class="acTooltip pageTooltip" id="acTooltip">
+        This field will do nothing, but doesn't it look pretty!
+      </div>
+      <hr/>
+    </div>
+    <div class="modCont">
+      <h2 class="modTitle">Hidden Elements</h2>
+      <div class="pageText">
+        Just inbetween here <span style="visibility:hidden">Boo</span> and here, there is a hidden element.
+      </div>
+      <hr/>
+    </div>
+    <div class="modCont">
+      <h2 class="modTitle">Hidden Message</h2>
+      <div class="pageText">
+        There is not a totally hidden message next to here >> <span class="acHiddenMsg">Boo</span>
+        << and here, there is a hidden element. </div>
+          <hr/>
+      </div>
+      <div class="modCont">
+        <h2 class="modTitle">Required input</h2>
+        <input type="text" required="true" class="pageInput" placeholder="I'm required" />
+        <input type="text" required="false" class="pageInput" placeholder="I'm not required" />
+        <hr/>
+      </div>
+      <div class="modCont">
+        <h2 class="modTitle">Checked Elements</h2>
+        <div class="pageRadios">
+          <label for="check1"><input type="radio" id="check1" name="pageCheck" />Check Me</label>
+          <label for="check2"><input type="radio" id="check2" name="pageCheck" checked />No Check Me</label>
+          <label for="check3"><input type="radio" id="check3" name="pageCheck" />Oh Please Check Me</label>
+        </div>
+        <hr/>
+      </div>
+      <div class="modCont">
+        <h2 class="modTitle">Disabled Elements</h2>
+        <input type="text" disabled class="pageInput" placeholder="I'm Disabled" />
+        <input type="text" class="pageInput" placeholder="I'm not Disabled" />
+        <hr/>
+      </div>
+      <div class="modCont">
+        <h2 class="modTitle">Disabled Elements</h2>
+        <input type="text" disabled class="pageInput" placeholder="I'm Disabled" />
+        <input type="text" class="pageInput" placeholder="I'm not Disabled" />
+        <hr/>
+      </div>
+      <div class="modCont">
+        <h2 class="modTitle">Select Element Selected</h2>
+        <select class="pageSelect">
+			<option value="select" >Select Option</option>
+			<option value="opt1" >Option 1</option>
+			<option value="opt2" selected >Option 2</option>
+			<option value="opt3" >Option 3</option>
+			<option value="opt4" >Option 4</option>
+			<option value="opt5" >Option 5</option>
+		</select>
+        <hr/>
+      </div>
+      <div class="modCont">
+        <h2 class="modTitle">Min and Max Attributes</h2>
+        <input type="text" min="10" class="pageInput" placeholder="I have a min of 10" />
+        <input type="text" max="20" class="pageInput" placeholder="I have a max of 20" />
+        <input type="text" min="10" max="20" class="pageInput pageCentered" placeholder="I have a both" />
+        <hr/>
+      </div>
+      <div class="modCont">
+        <h2 class="modTitle">Navigation</h2>
+        <nav>
+          <ul class="acNav pageNav">
+            <li><a href="https://purerandomcode.wordpress.com" target="_blank" id="link1" class="acSubNav">Link 1</a></li>
+            <li><a href="https://purerandomcode.wordpress.com" target="_blank" id="link2" class="acSubNav">Link 2</a></li>
+            <li><a href="https://purerandomcode.wordpress.com" target="_blank" id="link3" class="acSubNav">Link 3</a><span></span>
+              <ul class="acSubMenu pageSubMenu">
+                <li><a href="https://purerandomcode.wordpress.com" target="_blank" class="acSubNav">Inner Link 1</a></li>
+                <li><a href="https://purerandomcode.wordpress.com" target="_blank" class="acSubNav">Inner Link 2</a></li>
+                <li><a href="https://purerandomcode.wordpress.com" target="_blank" class="acSubNav">Inner Link 3</a></li>
+              </ul>
+            </li>
+            <li><a href="https://purerandomcode.wordpress.com" target="_blank" id="link4" class="acSubNav">Link 4</a></li>
+            <li><a href="https://purerandomcode.wordpress.com" target="_blank" id="link5" class="acSubNav">Link 5</a></li>
+          </ul>
+        </nav>
+        <hr/>
+      </div>
+      <div class="modCont">
+        <h2 class="modTitle">Buttons</h2>
+        <input type="submit" class="pageBtn" value="Click Me" />
+        <hr/>
+      </div>
+    </div>
+
+    <script>
+    function onScreen(el){
+    const win = $(window);
+	
+    const viewport = {
+      top : win.scrollTop(),
+      left : win.scrollLeft()
+    };
+    viewport.right = viewport.left + win.width();
+    viewport.bottom = viewport.top + win.height();
+	
+	  const bounds = el.offset();
+    bounds.right = bounds.left + el.outerWidth();
+    bounds.bottom = bounds.top + el.outerHeight();
+	
+    return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+  }
+  QUnit.test("Hidden Message", function( assert ) {
+    const el = $('.acHiddenMsg');
+    
+    assert.equal(onScreen(el), false);
+  });
+
+  class nodeChecker{
+    constructor(nodeArr){
+      this._nodeArr = nodeArr;
+    }
+    nodeNameExist(nodeName){
+      for (let i=0, n=this._nodeArr.length;i<n;i++){
+        const curNode = this._nodeArr[i];
+        if (curNode.nodeName === nodeName)
+          return true;
+      }
+      return false;
+    }
+    nodeValueEquals(nodeName, nodeValue){
+      for (let i=0, n=this._nodeArr.length;i<n;i++){
+        const curNode = this._nodeArr[i];
+        if (curNode.nodeName === nodeName && curNode.nodeValue === nodeValue)
+          return true;
+      }
+      return false;
+    }
+  }
+  QUnit.test("Alert Message", function( assert ) {
+    const elAttr = $('.acAlert')[0].attributes;
+    const nodeCheck = new nodeChecker(elAttr);
+
+    assert.equal(nodeCheck.nodeNameExist('aria-atomic'), true);
+    assert.equal(nodeCheck.nodeValueEquals('aria-atomic','true'), true);
+
+    assert.equal(nodeCheck.nodeNameExist('role'), true);
+    assert.equal(nodeCheck.nodeValueEquals('role','alert'), true);
+
+    assert.equal(nodeCheck.nodeNameExist('aria-live'), true);
+    assert.equal(nodeCheck.nodeValueEquals('aria-live','rude'), true);
+  });
+  QUnit.test("Warning Message", function( assert ) {
+    const elAttr = $('.acWarning')[0].attributes;
+    const nodeCheck = new nodeChecker(elAttr);
+
+    assert.equal(nodeCheck.nodeNameExist('aria-atomic'), true);
+    assert.equal(nodeCheck.nodeValueEquals('aria-atomic','true'), true);
+
+    assert.equal(nodeCheck.nodeNameExist('role'), true);
+    assert.equal(nodeCheck.nodeValueEquals('role','alert'), true);
+
+    assert.equal(nodeCheck.nodeNameExist('aria-live'), true);
+    assert.equal(nodeCheck.nodeValueEquals('aria-live','assertive'), true);
+    
+  });
+  QUnit.test("General Message", function( assert ) {
+    const elAttr = $('.acMsg')[0].attributes;
+    const nodeCheck = new nodeChecker(elAttr);
+
+    assert.equal(nodeCheck.nodeNameExist('aria-atomic'), true);
+    assert.equal(nodeCheck.nodeValueEquals('aria-atomic','true'), true);
+
+    assert.equal(nodeCheck.nodeNameExist('role'), true);
+    assert.equal(nodeCheck.nodeValueEquals('role','alert'), true);
+
+    assert.equal(nodeCheck.nodeNameExist('aria-live'), true);
+    assert.equal(nodeCheck.nodeValueEquals('aria-live','polite'), true);
+    
+  });
+ 
+  QUnit.test("Required", function( assert ) {
+    const requireTrue = Boolean($('input[required="true"]').attr('aria-required'));
+    const requireFalse = Boolean($('input[required="false"]').attr('aria-required'));
+
+    assert.equal(requireTrue, true);
+    assert.equal(requireFalse, false);
+    
+  });
+
+  QUnit.test("Tooltip/Pop up Hidden", function( assert ) {
+    const tooltipAttr = $('.acTooltip')[0].attributes;
+    const tooltipNodeCheck = new nodeChecker(tooltipAttr);
+
+    assert.equal(tooltipNodeCheck.nodeNameExist('aria-hidden'), true);
+    assert.equal(tooltipNodeCheck.nodeValueEquals('aria-hidden','true'), true);
+
+    assert.equal(tooltipNodeCheck.nodeNameExist('role'), true);
+    assert.equal(tooltipNodeCheck.nodeValueEquals('role','tooltip'), true);
+
+    assert.equal(tooltipNodeCheck.nodeNameExist('aria-expanded'), true);
+    assert.equal(tooltipNodeCheck.nodeValueEquals('aria-expanded','false'), true);
+
+    const inputAttr = $('.acTooltipCtrl')[0].attributes;
+    const inputNodeCheck = new nodeChecker(inputAttr);
+
+    assert.equal(inputNodeCheck.nodeNameExist('aria-haspopup'), true);
+    assert.equal(inputNodeCheck.nodeValueEquals('aria-haspopup','true'), true);
+
+    assert.equal(inputNodeCheck.nodeNameExist('aria-describedby'), true);
+    assert.equal(inputNodeCheck.nodeValueEquals('aria-describedby',$('.acTooltip').attr('id')), true);
+
+    assert.equal(inputNodeCheck.nodeNameExist('aria-controls'), true);
+    assert.equal(inputNodeCheck.nodeValueEquals('aria-controls',$('.acTooltip').attr('id')), true);
+    
+  });
+  QUnit.test("Tooltip/Pop up Visible", function( assert ) {
+    window.showTooltip();
+    const tooltipAttr = $('.acTooltip')[0].attributes;
+    const tooltipNodeCheck = new nodeChecker(tooltipAttr);
+
+    assert.equal(tooltipNodeCheck.nodeNameExist('aria-hidden'), true);
+    assert.equal(tooltipNodeCheck.nodeValueEquals('aria-hidden','false'), true);
+
+    assert.equal(tooltipNodeCheck.nodeNameExist('role'), true);
+    assert.equal(tooltipNodeCheck.nodeValueEquals('role','tooltip'), true);
+
+    assert.equal(tooltipNodeCheck.nodeNameExist('aria-expanded'), true);
+    assert.equal(tooltipNodeCheck.nodeValueEquals('aria-expanded','true'), true);
+
+    const inputAttr = $('.acTooltipCtrl')[0].attributes;
+    const inputNodeCheck = new nodeChecker(inputAttr);
+
+    assert.equal(inputNodeCheck.nodeNameExist('aria-haspopup'), true);
+    assert.equal(inputNodeCheck.nodeValueEquals('aria-haspopup','true'), true);
+
+    assert.equal(inputNodeCheck.nodeNameExist('aria-describedby'), true);
+    assert.equal(inputNodeCheck.nodeValueEquals('aria-describedby',$('.acTooltip').attr('id')), true);
+
+    assert.equal(inputNodeCheck.nodeNameExist('aria-controls'), true);
+    assert.equal(inputNodeCheck.nodeValueEquals('aria-controls',$('.acTooltip').attr('id')), true);
+    
+    window.hideTooltip();
+  });
+    </script>
+
+</body>
+
+</html>

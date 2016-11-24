@@ -1,0 +1,152 @@
+body {
+    background-color: #05668D;
+    font-family: arial;
+    font-size: 14px;
+}
+
+.pageCont {
+    max-width: 80%;
+    width: 100%;
+    margin: 5% auto 5% auto;
+}
+
+.modTitle, h1 {
+    color: #EBF2FA;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+hr {
+    border-color: #679436;
+    margin: 2% auto 2% auto;
+}
+
+.pageText {
+    color: #EBF2FA;
+}
+
+.pageSelect {
+    width: 49%;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+
+/*-- Alert --*/
+
+.pageAlert {
+    border: 4px solid #D62828;
+    border-radius: 10px;
+    background-color: white;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 15px;
+    &.acAlert {
+        border-color: #D62828;
+        color: #D62828;
+    }
+    &.acWarning {
+        border-color: #F77F00;
+        color: #F77F00;
+    }
+    &.acMsg {
+        border-color: #679436;
+        color: #679436;
+    }
+}
+
+
+/*-- Tooltip --*/
+
+.pageInput, .pageTooltip {
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 48%;
+    display: inline-block;
+    vertical-align: top;
+    &.pageInput {
+        border: 2px solid transparent;
+        &:focus {
+            border-color: #427AA1;
+        }
+    }
+    &.pageCentered {
+        margin: auto;
+        margin-top: 5px;
+        display: block;
+    }
+}
+
+&.pageTooltip {
+    display: none;
+    margin-left: 5px;
+    background-color: #679436;
+    color: #EBF2FA;
+}
+
+.pageRadios label {
+    display: block;
+    color: #EBF2FA;
+}
+
+ul.pageNav {
+    padding: 0;
+    margin: 0;
+    li {
+        list-style: none;
+        display: inline-block;
+        background-color: #679436;
+        box-sizing: border-box;
+        padding: 5px;
+        min-width: 19%;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+        &:hover {
+            background-color: #A5BE00;
+            .pageSubMenu {
+                display: block;
+            }
+        }
+        a {
+            text-decoration: none;
+            color: #EBF2FA;
+            font-size: 14px;
+        }
+        .pageSubMenu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            li {
+                float: left;
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+/*-- Button --*/
+
+input.pageBtn {
+    background-color: #679436;
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0;
+    color: #EBF2FA;
+    cursor: pointer;
+    font-size: 20px;
+    &:hover {
+        background-color: #A5BE00;
+    }
+}
