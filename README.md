@@ -6,7 +6,7 @@ This libraries purpose is to automatically inject the necessary tags and command
 
 Here are some helpful links about ARIA to help understand the tags and their values.
 
-
+* [ARIA Control Blog Post](https://purerandomcode.wordpress.com/2016/03/14/aria-control-javascript-library)
 * [Open Ajax](http://oaa-accessibility.org/)
 * [W3C](http://w3c.github.io/html-reference/aria/aria.html)
 * [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA)
