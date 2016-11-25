@@ -45,96 +45,155 @@ To turn off the Auto Detection add in the property `_autoDetect` with a Boolean 
 # How to use?
 
 ### Hidden
-Hide an element from screen readers.
-##### Auto Detection
-Add `display:none` or `visibility:hidden` to the element.
-##### Function 
-Hide element: `hidden(hiddenClass)`
-Show element: `unhidden(hiddenClass)`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hide an element from screen readers.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Auto Detection
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add `display:none` or `visibility:hidden` to the element.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hide element: `hidden(hiddenClass)`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show element: `unhidden(hiddenClass)`
 
 ### Visible but Hideen
-Hide an element from visibility, but visisble to screen readers.
-##### Auto Detection
-Set the object property `_hiddenMsgClass` when initialising ES6 class.
-##### Function 
-None
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hide an element from visibility, but visisble to screen readers.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Auto Detection
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the object property `_hiddenMsgClass` when initialising ES6 class.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None
 
 ### Alert Messages
-Announce the display of the message depending on level of alert.
-##### Auto Detection
-General Message: `_msgClass`
-Alert: `_alertClass`
-Warning: `_warningClass`
-##### Function 
-General Message: `autoMsg()`
-Alert: `autoAlert()`
-Warning: `autoWarning()`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Announce the display of the message depending on level of alert.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Auto Detection
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General Message: `_msgClass`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alert: `_alertClass`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warning: `_warningClass`
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General Message: `autoMsg()`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alert: `autoAlert()`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Warning: `autoWarning()`
 
 ### Required
-Add the ARIA required property.
-##### Auto Detection
-Add the property `required` with either `true` or `false`
-##### Function  
-`required(requiredClass, isRequired)`
-`requiredClass` is a String
-`isRequired` is Boolean
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add the ARIA required property.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Auto Detection
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add the property `required` with either `true` or `false`
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`required(requiredClass, isRequired)`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`requiredClass` is a String
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`isRequired` is Boolean
 
 ### Pop Up
-This can be for things like modal windows or tooltips. You will need to use the functions when showing and hiding the Pop Ups
-##### Auto Detection
-Pop Up Trigger Class: `_popupCtrlClass`
-Pop Up Item: `_popupClass`
-ARIA Pop Up Type: `_popupType`
-    Example:
-        * `tooltip`
-        * `dialog`
-##### Function  
-Set Up Pop Up: `popup(pCtrlClass, pClass, pType)`
-Show Pop Up: `showPopup(pClass)`
-Hide Pop Up: `hidePopup(pClass)`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This can be for things like modal windows or tooltips. You will need to use the functions when showing and hiding the Pop Ups
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Auto Detection
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pop Up Trigger Class: `_popupCtrlClass`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pop Up Item: `_popupClass`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ARIA Pop Up Type: `_popupType`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Example:
+
+* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`tooltip`
+
+* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`dialog`
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set Up Pop Up: `popup(pCtrlClass, pClass, pType)`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show Pop Up: `showPopup(pClass)`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hide Pop Up: `hidePopup(pClass)`
 
 ### Checked
-Add the ARIA checked property for checkboxes and radio buttons.
-##### Auto Detection
-Add the property `checked` if it is checked.
-##### Function  
-`checked(checkedClass)`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add the ARIA checked property for checkboxes and radio buttons.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Auto Detection
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add the property `checked` if it is checked.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`checked(checkedClass)`
 
 ### Disabled
-Add the ARIA disabled property for input, button, select, textarea, optgroup, option and fieldset.
-##### Auto Detection
-Add the property `disabled` if it is disabled.
-##### Function  
-`disabled(disabledClass)`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add the ARIA disabled property for input, button, select, textarea, optgroup, option and fieldset.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Auto Detection
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add the property `disabled` if it is disabled.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`disabled(disabledClass)`
 
 ### Selected
-Add the ARIA selected property for the select elements option.
-##### Auto Detection
-Any option that is selected.
-##### Function  
-`selected(selectClass)`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add the ARIA selected property for the select elements option.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Auto Detection
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Any option that is selected.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`selected(selectClass)`
 
 ### Max value
-Add the ARIA max property on inputs with the max attribute.
-##### Auto Detection
-Any input that has a max attribute.
-##### Function  
-`max(maxClass)`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add the ARIA max property on inputs with the max attribute.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Auto Detection
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Any input that has a max attribute.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`max(maxClass)`
 
 ### Min value
-Add the ARIA max property on inputs with the min attribute.
-##### Auto Detection
-Any input that has a min attribute.
-##### Function  
-`min(minClass)`
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add the ARIA max property on inputs with the min attribute.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp Auto Detection
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Any input that has a min attribute.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`min(minClass)`
 
 ### Navigation
-Add the ARIA properties for a menu. It will also handle the links, sub menus and the toggling of sub menus.
-##### Auto Detection
-Navigation Control: `_navClass`
-Sub Menu Control: `_navSubNavClass`
-##### Function  
-None
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add the ARIA properties for a menu. It will also handle the links, sub menus and the toggling of sub menus.
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Auto Detection
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Navigation Control: `_navClass`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sub Menu Control: `_navSubNavClass`
+
+##### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;None
 
 ## Release Notes
 Please see all updates below
