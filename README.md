@@ -1,3 +1,4 @@
+![ARIA Control](https://purerandomcode.files.wordpress.com/2016/03/ariacontrol.jpg?w=1462)
 # AriaControl
 ARIA Control JavaScript Library
 
