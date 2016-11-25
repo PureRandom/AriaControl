@@ -1,5 +1,5 @@
 (function(ac) {
-	ac.version = 'ARIA Connect | Written by Christopher Pateman | https://purerandomcode.wordpress.com/ | V1';
+	ac.version = 'ARIA Control | Written by Christopher Pateman | https://purerandomcode.wordpress.com/ | V1';
 	ac.dependencies = 'jQuery';
 
 	ac = function(options) {

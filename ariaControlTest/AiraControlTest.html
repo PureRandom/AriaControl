@@ -9,12 +9,11 @@
   <script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
   <link rel="stylesheet" href="ariaControl.css">
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="../ariaConnect.js"></script>
-  <script src="../ariaControlQUnits.js"></script>
+  <script src="../ariaControl.js"></script>
 
   <script>
     $(document).ready(function(){
-      const acCtrl = new ariaConnect();
+      const acCtrl = new ariaControl();
 
        window.showTooltip = () => {
         $('.pageTooltip').css('display', 'inline-block');
@@ -115,13 +114,7 @@
       <div class="modCont">
         <h2 class="modTitle">Disabled Elements</h2>
         <input type="text" disabled class="pageInput" placeholder="I'm Disabled" />
-        <input type="text" class="pageInput" placeholder="I'm not Disabled" />
-        <hr/>
-      </div>
-      <div class="modCont">
-        <h2 class="modTitle">Disabled Elements</h2>
-        <input type="text" disabled class="pageInput" placeholder="I'm Disabled" />
-        <input type="text" class="pageInput" placeholder="I'm not Disabled" />
+        <input type="text" disabled="false" class="pageInput" placeholder="I'm not Disabled" />
         <hr/>
       </div>
       <div class="modCont">
@@ -196,7 +189,7 @@
     constructor(nodeArr){
       this._nodeArr = nodeArr;
     }
-    nodeNameExist(nodeName){
+    nodeNameExist(nodeName) {
       for (let i=0, n=this._nodeArr.length;i<n;i++){
         const curNode = this._nodeArr[i];
         if (curNode.nodeName === nodeName)
@@ -204,7 +197,7 @@
       }
       return false;
     }
-    nodeValueEquals(nodeName, nodeValue){
+    nodeValueEquals(nodeName, nodeValue) {
       for (let i=0, n=this._nodeArr.length;i<n;i++){
         const curNode = this._nodeArr[i];
         if (curNode.nodeName === nodeName && curNode.nodeValue === nodeValue)
@@ -212,111 +205,187 @@
       }
       return false;
     }
+    assertNode(nodes, assert) {
+      for (let n in nodes) {
+        assert.equal(this.nodeNameExist(n), true);
+        assert.equal(this.nodeValueEquals(n, nodes[n]), true);
+      }
+    }
   }
   QUnit.test("Alert Message", function( assert ) {
-    const elAttr = $('.acAlert')[0].attributes;
-    const nodeCheck = new nodeChecker(elAttr);
-
-    assert.equal(nodeCheck.nodeNameExist('aria-atomic'), true);
-    assert.equal(nodeCheck.nodeValueEquals('aria-atomic','true'), true);
-
-    assert.equal(nodeCheck.nodeNameExist('role'), true);
-    assert.equal(nodeCheck.nodeValueEquals('role','alert'), true);
-
-    assert.equal(nodeCheck.nodeNameExist('aria-live'), true);
-    assert.equal(nodeCheck.nodeValueEquals('aria-live','rude'), true);
+    const elAttr = $('.acAlert')[0];
+    let nodes = {
+      'aria-atomic' : 'true',
+      'role' : 'alert',
+      'aria-live' : 'rude',
+    }
+    new nodeChecker(elAttr.attributes).assertNode(nodes, assert);
+    
   });
   QUnit.test("Warning Message", function( assert ) {
-    const elAttr = $('.acWarning')[0].attributes;
-    const nodeCheck = new nodeChecker(elAttr);
-
-    assert.equal(nodeCheck.nodeNameExist('aria-atomic'), true);
-    assert.equal(nodeCheck.nodeValueEquals('aria-atomic','true'), true);
-
-    assert.equal(nodeCheck.nodeNameExist('role'), true);
-    assert.equal(nodeCheck.nodeValueEquals('role','alert'), true);
-
-    assert.equal(nodeCheck.nodeNameExist('aria-live'), true);
-    assert.equal(nodeCheck.nodeValueEquals('aria-live','assertive'), true);
+    const elAttr = $('.acWarning')[0];
+    let nodes = {
+      'aria-atomic' : 'true',
+      'role' : 'alert',
+      'aria-live' : 'assertive',
+    }
+    new nodeChecker(elAttr.attributes).assertNode(nodes, assert);
     
   });
   QUnit.test("General Message", function( assert ) {
-    const elAttr = $('.acMsg')[0].attributes;
-    const nodeCheck = new nodeChecker(elAttr);
-
-    assert.equal(nodeCheck.nodeNameExist('aria-atomic'), true);
-    assert.equal(nodeCheck.nodeValueEquals('aria-atomic','true'), true);
-
-    assert.equal(nodeCheck.nodeNameExist('role'), true);
-    assert.equal(nodeCheck.nodeValueEquals('role','alert'), true);
-
-    assert.equal(nodeCheck.nodeNameExist('aria-live'), true);
-    assert.equal(nodeCheck.nodeValueEquals('aria-live','polite'), true);
+    const elAttr = $('.acMsg')[0];
+    let nodes = {
+      'aria-atomic' : 'true',
+      'role' : 'alert',
+      'aria-live' : 'polite',
+    }
+    new nodeChecker(elAttr.attributes).assertNode(nodes, assert);
     
   });
  
   QUnit.test("Required", function( assert ) {
-    const requireTrue = Boolean($('input[required="true"]').attr('aria-required'));
-    const requireFalse = Boolean($('input[required="false"]').attr('aria-required'));
-
-    assert.equal(requireTrue, true);
-    assert.equal(requireFalse, false);
+    const requireTrue = $('input[required="true"]')[0];
+    let nodes = {
+      'aria-required' : 'true',
+    }
+    new nodeChecker(requireTrue.attributes).assertNode(nodes, assert);
     
+    const requireFalse = $('input[required="false"]')[0];
+    nodes = {
+      'aria-required' : 'false',
+    }
+    new nodeChecker(requireFalse.attributes).assertNode(nodes, assert);
   });
 
   QUnit.test("Tooltip/Pop up Hidden", function( assert ) {
-    const tooltipAttr = $('.acTooltip')[0].attributes;
-    const tooltipNodeCheck = new nodeChecker(tooltipAttr);
+    const tooltipAttr = $('.acTooltip')[0];
+    let nodes = {
+      'aria-hidden' : 'true',
+      'role' : 'tooltip',
+      'aria-expanded' : 'false',
+    }
+    new nodeChecker(tooltipAttr.attributes).assertNode(nodes, assert);
 
-    assert.equal(tooltipNodeCheck.nodeNameExist('aria-hidden'), true);
-    assert.equal(tooltipNodeCheck.nodeValueEquals('aria-hidden','true'), true);
-
-    assert.equal(tooltipNodeCheck.nodeNameExist('role'), true);
-    assert.equal(tooltipNodeCheck.nodeValueEquals('role','tooltip'), true);
-
-    assert.equal(tooltipNodeCheck.nodeNameExist('aria-expanded'), true);
-    assert.equal(tooltipNodeCheck.nodeValueEquals('aria-expanded','false'), true);
-
-    const inputAttr = $('.acTooltipCtrl')[0].attributes;
-    const inputNodeCheck = new nodeChecker(inputAttr);
-
-    assert.equal(inputNodeCheck.nodeNameExist('aria-haspopup'), true);
-    assert.equal(inputNodeCheck.nodeValueEquals('aria-haspopup','true'), true);
-
-    assert.equal(inputNodeCheck.nodeNameExist('aria-describedby'), true);
-    assert.equal(inputNodeCheck.nodeValueEquals('aria-describedby',$('.acTooltip').attr('id')), true);
-
-    assert.equal(inputNodeCheck.nodeNameExist('aria-controls'), true);
-    assert.equal(inputNodeCheck.nodeValueEquals('aria-controls',$('.acTooltip').attr('id')), true);
+    const tooltipCtrl = $('.acTooltipCtrl')[0];
+    nodes = {
+      'aria-haspopup' : 'true',
+      'aria-describedby' : tooltipAttr.id,
+      'aria-controls' : tooltipAttr.id,
+    }
+    new nodeChecker(tooltipCtrl.attributes).assertNode(nodes, assert);
     
   });
   QUnit.test("Tooltip/Pop up Visible", function( assert ) {
     window.showTooltip();
-    const tooltipAttr = $('.acTooltip')[0].attributes;
-    const tooltipNodeCheck = new nodeChecker(tooltipAttr);
 
-    assert.equal(tooltipNodeCheck.nodeNameExist('aria-hidden'), true);
-    assert.equal(tooltipNodeCheck.nodeValueEquals('aria-hidden','false'), true);
+    const tooltipAttr = $('.acTooltip')[0];
+    let nodes = {
+      'aria-hidden' : 'false',
+      'role' : 'tooltip',
+      'aria-expanded' : 'true',
+    }
+    new nodeChecker(tooltipAttr.attributes).assertNode(nodes, assert);
 
-    assert.equal(tooltipNodeCheck.nodeNameExist('role'), true);
-    assert.equal(tooltipNodeCheck.nodeValueEquals('role','tooltip'), true);
-
-    assert.equal(tooltipNodeCheck.nodeNameExist('aria-expanded'), true);
-    assert.equal(tooltipNodeCheck.nodeValueEquals('aria-expanded','true'), true);
-
-    const inputAttr = $('.acTooltipCtrl')[0].attributes;
-    const inputNodeCheck = new nodeChecker(inputAttr);
-
-    assert.equal(inputNodeCheck.nodeNameExist('aria-haspopup'), true);
-    assert.equal(inputNodeCheck.nodeValueEquals('aria-haspopup','true'), true);
-
-    assert.equal(inputNodeCheck.nodeNameExist('aria-describedby'), true);
-    assert.equal(inputNodeCheck.nodeValueEquals('aria-describedby',$('.acTooltip').attr('id')), true);
-
-    assert.equal(inputNodeCheck.nodeNameExist('aria-controls'), true);
-    assert.equal(inputNodeCheck.nodeValueEquals('aria-controls',$('.acTooltip').attr('id')), true);
+    const tooltipCtrl = $('.acTooltipCtrl')[0];
+    nodes = {
+      'aria-haspopup' : 'true',
+      'aria-describedby' : tooltipAttr.id,
+      'aria-controls' : tooltipAttr.id,
+    }
+    new nodeChecker(tooltipCtrl.attributes).assertNode(nodes, assert);
     
     window.hideTooltip();
+  });
+
+  QUnit.test("Checkbox/Radio Checked", function( assert ) {
+    let inputChecked = $('input:checked[type="radio"]')[0];
+    let nodes = {
+      'aria-checked' : 'true',
+    }
+    new nodeChecker(inputChecked.attributes).assertNode(nodes, assert);
+
+    inputChecked = $('input:not(:checked)[type="radio"]')[0];
+    nodes = {
+      'aria-checked' : 'false',
+    }
+    new nodeChecker(inputChecked.attributes).assertNode(nodes, assert);
+
+  });
+
+  QUnit.test("Element Disabled", function( assert ) {
+    let inputDisabled = $('input:disabled')[0];
+    let nodes = {
+      'aria-disabled' : 'true',
+    }
+    new nodeChecker(inputDisabled.attributes).assertNode(nodes, assert);
+
+  });
+
+  QUnit.test("Select Option Selected", function( assert ) {
+    let optionSelected = $('select option:selected')[0];
+    let nodes = {
+      'aria-selected' : 'true',
+    }
+    new nodeChecker(optionSelected.attributes).assertNode(nodes, assert);
+
+    optionSelected = $('select option:not(:selected)')[0];
+    nodes = {
+      'aria-selected' : 'false',
+    }
+    new nodeChecker(optionSelected.attributes).assertNode(nodes, assert);
+
+  });
+
+  QUnit.test("Input Max and Min", function( assert ) {
+    let inputMaxMin = $('input[max]')[0];
+    let nodes = {
+      'aria-valuemax' : inputMaxMin.max,
+    }
+    new nodeChecker(inputMaxMin.attributes).assertNode(nodes, assert);
+
+    inputMaxMin = $('input[min]')[0];
+    nodes = {
+      'aria-valuemin' : inputMaxMin.min,
+    }
+    new nodeChecker(inputMaxMin.attributes).assertNode(nodes, assert);
+
+  });
+
+  QUnit.test("Button", function( assert ) {
+    let inputRole = $('input[type="submit"]')[0];
+    let nodes = {
+      'role' : 'button',
+    }
+    new nodeChecker(inputRole.attributes).assertNode(nodes, assert);
+
+  });
+
+  QUnit.test("Navigation", function( assert ) {
+    const navigation = $('.acNav')[0];
+    let nodes = {
+      'role' : 'menubar',
+      'aria-live' : 'polite',
+      'aria-atomic' : 'false',
+    }
+    new nodeChecker(navigation.attributes).assertNode(nodes, assert);
+
+    const subNav = $('.acSubNav')[0];
+    nodes = {
+      'role' : 'menuitem',
+      'aria-label' : subNav.innerText,
+      'aria-haspopup' : 'false',
+    }
+    new nodeChecker(subNav.attributes).assertNode(nodes, assert);
+
+    const subNavMenu = $('.acSubMenu')[0];
+    nodes = {
+      'role' : 'presentation',
+      'aria-hidden' : 'true',
+      'aria-labelledby' : $(subNavMenu).parent().children('a')[0].id,
+      'aria-expanded' : 'false',
+    }
+    new nodeChecker(subNavMenu.attributes).assertNode(nodes, assert);
+
   });
     </script>
 

@@ -1,27 +1,27 @@
-class ariaConnect {
-    constructor(autoDetect = true,
-        alertClass = '.acAlert',
-        warningClass = '.acWarning',
-        msgClass = '.acMsg',
-        popupClass = '.acTooltip',
-        popupCtrlClass = '.acTooltipCtrl',
-        popupType = 'tooltip',
-        hiddenMsgClass = '.acHiddenMsg',
-        navClass = '.acNav',
-        navParentClass = '.acSubNav',
-        navSubNavClass = '.acSubMenu') {
+class ariaControl {
+    get version(){ return 'ARIA Control | Written by Christopher Pateman | https://purerandomcode.wordpress.com/ | V2.0.0'; }
+    set version(value){ }
+    get dependencies(){ return 'jQuery 2.X and up'; }
+    set dependencies(value){ }
 
-        this._autoDetect = autoDetect;
-        this._alertClass = alertClass;
-        this._warningClass = warningClass;
-        this._msgClass = msgClass;
-        this._popupClass = popupClass;
-        this._popupCtrlClass = popupCtrlClass;
-        this._popupType = popupType;
-        this._hiddenMsgClass = hiddenMsgClass;
-        this._navClass = navClass;
-        this._navParentClass = navParentClass;
-        this._navSubNavClass = navSubNavClass;
+    constructor(_customObj) {
+
+        const _defaultObj = {
+            _autoDetect: true,
+            _alertClass: '.acAlert',
+            _warningClass: '.acWarning',
+            _msgClass: '.acMsg',
+            _popupClass: '.acTooltip',
+            _popupCtrlClass: '.acTooltipCtrl',
+            _popupType: 'tooltip',
+            _hiddenMsgClass: '.acHiddenMsg',
+            _navClass: '.acNav',
+            _navParentClass: '.acSubNav',
+            _navSubNavClass: '.acSubMenu',
+        };
+
+        $.extend( _defaultObj, _customObj );
+        $.extend( this, _defaultObj );
 
         this.init();
     }
@@ -91,11 +91,11 @@ class ariaConnect {
         $(noteClass).attr('aria-live', live);
     }
     autoRequired() {
-        this.required($('body *[required="true"]'));
-        this.required($('body *[required=""]'));
+        this.required($('input[required="true"], button[required="true"], select[required="true"], textarea[required="true"], optgroup[required="true"], option[required="true"]'), true);
+        this.required($('input[required="false"], button[required="false"], select[required="false"], textarea[required="false"], optgroup[required="false"], option[required="false"]'), false);
     }
-    required(requiredClass) {
-        $(requiredClass).attr('aria-required', 'true');
+    required(requiredClass, isRequired) {
+        $(requiredClass).attr('aria-required', isRequired);
     }
     autoPopup() {
         this.popup(this._popupCtrlClass, this._popupClass, this._popupType);
@@ -105,14 +105,14 @@ class ariaConnect {
         $(pCtrlClass).attr('aria-haspopup', 'true').attr('aria-describedby', identifier).attr('aria-controls', identifier);
         $(pClass).attr('role', pType).attr('aria-hidden', 'true').attr('aria-expanded', 'false');
     }
-    showPopup(popUp) {
-        $(popUp).attr('aria-hidden', 'false').attr('aria-expanded', 'true');
+    showPopup(pClass) {
+        $(pClass).attr('aria-hidden', 'false').attr('aria-expanded', 'true');
     }
-    hidePopup(popUp) {
-        $(popUp).attr('aria-hidden', 'true').attr('aria-expanded', 'false');
+    hidePopup(pClass) {
+        $(pClass).attr('aria-hidden', 'true').attr('aria-expanded', 'false');
     }
     autoChecked() {
-        this.checked($('input:checked'));
+        this.checked($('input[type="checkbox"], input[type="radio"]'));
         const changeCheck = this.checked;
         $('input[type="checkbox"], input[type="radio"]').change(function () {
             changeCheck($(`input[name="${$(this).prop('name')}"]`));
@@ -124,7 +124,7 @@ class ariaConnect {
         });
     }
     autoDisabled() {
-        this.disabled($('*:disabled'));
+        this.disabled($('input:disabled, button:disabled, select:disabled, textarea:disabled, optgroup:disabled, option:disabled, fieldset:disabled'));
     }
     disabled(disabledClass) {
         $(disabledClass).each(function () {
